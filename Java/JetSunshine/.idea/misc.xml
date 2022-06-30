@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Develop/Android/Code/Mine/TrySunshine/Java/JetSunshine/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14" />
         <entry key="..\:/Develop/Demo/Android/Mine/JetSunshine/app/src/main/res/layout-land/activity_detail.xml" value="0.2031523642732049" />
         <entry key="..\:/Develop/Demo/Android/Mine/JetSunshine/app/src/main/res/layout/activity_detail.xml" value="0.24166666666666667" />
         <entry key="..\:/Develop/Demo/Android/Mine/JetSunshine/app/src/main/res/layout/activity_forecast.xml" value="0.24166666666666667" />
@@ -24,7 +25,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
