@@ -6,13 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import dagger.hilt.android.AndroidEntryPoint;
-import pri.weiqiang.jet.sunshine.R;
 import pri.weiqiang.jet.sunshine.databinding.FragmentMainBinding;
+import pri.weiqiang.jet.sunshine.ui.adapter.ForecastAdapter;
 import pri.weiqiang.jet.sunshine.ui.viewmodel.WeatherViewModel;
 import pri.weiqiang.jet.sunshine.util.PermissionUtils;
 
@@ -21,6 +24,7 @@ public class MainFragment extends Fragment {
     private String TAG = MainFragment.class.getSimpleName();
     private FragmentMainBinding binding;
     private WeatherViewModel weatherViewModel;
+    private ForecastAdapter adapter;
 
     @Override
     public View onCreateView(
@@ -38,12 +42,21 @@ public class MainFragment extends Fragment {
         requestPermissions();
         weatherViewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
         weatherViewModel.getWeather();
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+        adapter = new ForecastAdapter(new ForecastAdapter.ForecastAdapterOnItemClickHandler() {
             @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(MainFragment.this)
-                        .navigate(R.id.action_MainFragment_to_DetailFragment);
+            public void onItemClick(Date date) {
+
             }
+        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        binding.recyclerviewForecast.setLayoutManager(linearLayoutManager);
+        binding.recyclerviewForecast.setHasFixedSize(true);
+        binding.recyclerviewForecast.setAdapter(adapter);
+        weatherViewModel = new ViewModelProvider(requireActivity()).get(WeatherViewModel.class);
+        weatherViewModel.getForecast().observe(getViewLifecycleOwner(), listWeatherEntries ->
+        {
+            adapter.submitList(listWeatherEntries);
         });
     }
 
